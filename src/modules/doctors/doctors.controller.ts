@@ -6,6 +6,7 @@ import { CreateDoctorDto } from './dto/create-doctor.dto';
 import { UpdateDoctorDto } from './dto/update-doctor.dto';
 import { SortingOption } from '../../shared/interfaces/sorting.interface';
 import { ApiTags, ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
+import { Public } from '../auth/decorators/public.decorator';
 
 @ApiTags('doctors')
 @ApiBearerAuth()
@@ -128,5 +129,11 @@ export class DoctorsController {
   @Delete(':id')
   async remove(@Param('id') id: string) {
     return this.doctorsService.remove(+id);
+  }
+
+  @Public()
+  @Post('register-admin')
+  async registerAdmin(@Body() createDoctorDto: CreateDoctorDto) {
+    return this.doctorsService.createDoctor(createDoctorDto);
   }
 }

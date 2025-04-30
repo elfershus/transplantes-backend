@@ -8,6 +8,7 @@ import { Receiver } from '../../shared/entities/receiver.entity';
 import { TransplantProcedure } from '../../shared/entities/transplant-procedure.entity';
 import { Transportation } from '../../shared/entities/transportation.entity';
 import { Institution } from '../../shared/entities/institution.entity';
+import { ParseDatePipe } from '../../common/pipes/parse-date.pipe';
 
 @Module({
   imports: [
@@ -21,7 +22,7 @@ import { Institution } from '../../shared/entities/institution.entity';
     ]),
   ],
   controllers: [ReportingController],
-  providers: [ReportingService],
+  providers: [ReportingService, ParseDatePipe],
   exports: [ReportingService],
 })
 export class ReportingModule {}

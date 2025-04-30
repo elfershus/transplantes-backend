@@ -1,6 +1,7 @@
-import { Controller, Get, Query, UseGuards, ParseIntPipe, ParseDatePipe } from '@nestjs/common';
+import { Controller, Get, Query, UseGuards, ParseIntPipe } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { ReportingService } from './reporting.service';
+import { ParseDatePipe } from '../../common/pipes/parse-date.pipe';
 
 @Controller('reports')
 @UseGuards(JwtAuthGuard)
