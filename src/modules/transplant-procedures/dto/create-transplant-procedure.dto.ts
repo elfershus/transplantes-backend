@@ -1,5 +1,6 @@
-import { IsNotEmpty, IsNumber, IsDateString, IsOptional, IsString, IsEnum } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional, IsString, IsEnum } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
+import { IsSimpleDate } from '../../../common/validators';
 
 export class CreateTransplantProcedureDto {
   @ApiProperty()
@@ -17,10 +18,10 @@ export class CreateTransplantProcedureDto {
   @IsNumber()
   institutionId: number;
 
-  @ApiProperty()
+  @ApiProperty({ description: 'Scheduled date in YYYY-MM-DD format' })
   @IsNotEmpty()
-  @IsDateString()
-  scheduledDate: Date;
+  @IsSimpleDate()
+  scheduledDate: string | Date;
 
   @ApiProperty({ required: false })
   @IsOptional()

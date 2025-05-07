@@ -31,6 +31,11 @@ export class DonorsService extends GenericCrudService<Donor> {
       consentStatus: createDonorDto.consentStatus,
       donationDate: createDonorDto.donationDate,
       status: createDonorDto.status,
+      email: createDonorDto.email,
+      phone: createDonorDto.phone,
+      address: createDonorDto.address,
+      city: createDonorDto.city,
+      postalCode: createDonorDto.postalCode,
     };
 
     const donor = await super.create(donorData);

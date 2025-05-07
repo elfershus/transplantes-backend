@@ -1,5 +1,6 @@
-import { IsNotEmpty, IsString, IsEnum, IsDateString, IsOptional, IsNumber } from 'class-validator';
+import { IsNotEmpty, IsString, IsEnum, IsOptional, IsNumber } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
+import { IsSimpleDate } from '../../../common/validators';
 
 export class CreateOrganDto {
   @ApiProperty()
@@ -12,15 +13,15 @@ export class CreateOrganDto {
   @IsEnum(['heart', 'liver', 'kidney', 'lung', 'pancreas', 'intestine'])
   type: string;
 
-  @ApiProperty({ required: false })
+  @ApiProperty({ required: false, description: 'Retrieval date in YYYY-MM-DD format' })
   @IsOptional()
-  @IsDateString()
-  retrievalDate?: Date;
+  @IsSimpleDate()
+  retrievalDate?: string | Date;
 
-  @ApiProperty({ required: false })
+  @ApiProperty({ required: false, description: 'Expiration date in YYYY-MM-DD format' })
   @IsOptional()
-  @IsDateString()
-  expirationDate?: Date;
+  @IsSimpleDate()
+  expirationDate?: string | Date;
 
   @ApiProperty({ enum: ['excellent', 'good', 'fair', 'poor'] })
   @IsNotEmpty()

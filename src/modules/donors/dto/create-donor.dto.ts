@@ -3,12 +3,13 @@ import {
   IsString,
   IsEnum,
   IsBoolean,
-  IsDateString,
   IsOptional,
   ValidateNested,
+  IsEmail,
 } from 'class-validator';
 import { Type } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
+import { IsSimpleDate } from '../../../common/validators';
 
 class ClinicHistoryDto {
   @ApiProperty({ required: false })
@@ -43,10 +44,10 @@ export class CreateDonorDto {
   @IsString()
   lastName: string;
 
-  @ApiProperty()
+  @ApiProperty({ description: 'Date of birth in YYYY-MM-DD format' })
   @IsNotEmpty()
-  @IsDateString()
-  dateOfBirth: Date;
+  @IsSimpleDate()
+  dateOfBirth: string | Date;
 
   @ApiProperty({ enum: ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'] })
   @IsNotEmpty()
@@ -68,10 +69,10 @@ export class CreateDonorDto {
   @IsBoolean()
   consentStatus: boolean;
 
-  @ApiProperty({ required: false })
+  @ApiProperty({ required: false, description: 'Donation date in YYYY-MM-DD format' })
   @IsOptional()
-  @IsDateString()
-  donationDate?: Date;
+  @IsSimpleDate()
+  donationDate?: string | Date;
 
   @ApiProperty({ enum: ['active', 'inactive', 'deceased', 'disqualified'] })
   @IsNotEmpty()
@@ -83,4 +84,30 @@ export class CreateDonorDto {
   @ValidateNested()
   @Type(() => ClinicHistoryDto)
   clinicHistory?: ClinicHistoryDto;
+
+  // Contact information fields
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsEmail()
+  email?: string;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsString()
+  phone?: string;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsString()
+  address?: string;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsString()
+  city?: string;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsString()
+  postalCode?: string;
 }

@@ -32,6 +32,21 @@ export class Donor extends BaseEntity {
   @Column()
   status: string;
 
+  @Column({ nullable: true })
+  email: string;
+
+  @Column({ nullable: true })
+  phone: string;
+
+  @Column({ nullable: true })
+  address: string;
+
+  @Column({ nullable: true })
+  city: string;
+
+  @Column({ name: 'postal_code', nullable: true })
+  postalCode: string;
+
   @OneToMany(() => Organ, (organ) => organ.donor)
   organs: Organ[];
 
